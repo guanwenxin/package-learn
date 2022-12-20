@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <input id="input"/>
+    <button id="button">小demo</button>
+    <div id="text"></div>
+    <script>
+        // 跨域问题
+
+        // const produectUrl = 'https://api.beingthink.com'
+        // // 本地mock的前缀
+        // const developmentUrl = 'http://127.0.0.1:4523/m1/2032232-0-default'
+        // axios.defaults.baseURL = developmentUrl;
+        
+        const username = 'aaa'
+        const password = '123456'
+        async function main() {
+
+            // const result = await axios.get(`/hello`, {
+            const result = await axios.get(`http://jisutqybmf.market.alicloudapi.com/weather/query`, {
+
+                headers: {
+                    Authorization: 'APPCODE 51666496883a48b2b4e371dcb77903c0'
+                },
+                params: {
+                    city: getCityName()
+                }
+            })
+
+            console.log(result.data.result.weather)
+
+            // 设置一下前端的内容
+            setTextToDiv(JSON.stringify(result.data.result.weather))
+        }
+        // main()
+        
+
+        // 显示天气信息
+        function setTextToDiv(text) {
+            const element = document.getElementById('text')
+            element.innerHTML = text;
+        }
+
+        // 获取城市信息
+        function getCityName() {
+            // 取到input，并获取input的值
+            const input = document.getElementById('input')
+            console.log(input.value)
+            return input.value;
+        }
+
+        // 当点击button按钮的时候，调用main函数
+        const button = document.getElementById('button')
+        button.addEventListener('click', () => {
+            main()
+        })
+
+
+    </script>
+
+</body>
+</html>

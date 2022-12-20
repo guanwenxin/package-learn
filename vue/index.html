@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- react -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+</head>
+
+<body>
+
+    <!-- 唯一会影响的是 全局的css样式 和 全局变量-->
+    <!-- 微前端 -->
+    <div id="react-root"></div>
+    <!-- 里面都会被挂载 -->
+    <div id="vue-root">{{ message }}
+        <span>{{message}}</span>
+    </div>
+    <script>
+        const { createApp } = Vue
+        const app = createApp({
+            data() {
+                return {
+                    message: 'Hello Vue!'
+                }
+            }
+        })
+        app.mount('#vue-root')
+    </script>
+    
+    <script>
+        const root = ReactDOM.createRoot(document.getElementById('react-root'));
+        root.render("Hello, world!react");
+    </script>
+
+</body>
+
+</html>

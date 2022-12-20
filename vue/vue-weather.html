@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>天气预报</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    
+    <div id="app">
+        <!-- 输入的值直接绑定，然后立马在下面显示 -->
+        <!-- v-model="city"数据的双向绑定 -->
+        <div><input v-model="city" /></div>
+        {{city}}
+        <!-- @click="getWeather 触发点击事件 -->
+        <button @click="getWeather">查询天气</button>
+        <div>{{weather}}</div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        const app = createApp({
+            // 本质上是 data：function data（） 简写
+            data() {
+                return {
+                    weather: '',
+                    city: '',
+                    baseUrl: 'http://jisutqybmf.market.alicloudapi.com/weather/query'
+                }
+            },
+            methods: {
+                // 发起axios请求
+                async getWeather() {
+                    // 所有retern的方法取得时候要加this   this.baseUrl
+                    const result = await axios.get(this.baseUrl, {
+                        headers: {
+                            Authorization: 'APPCODE 51666496883a48b2b4e371dcb77903c0'
+                        },
+                        params: {
+                            city: this.city
+                        }
+                    })
+                    // 是异步函数,只需要
+                    this.weather = result.data.result
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+
+</body>
+</html>
