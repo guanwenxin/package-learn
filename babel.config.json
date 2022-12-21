@@ -1,0 +1,10 @@
+{
+    // "plugins": [
+    //     "@babel/plugin-transform-destructuring",
+    //     "@babel/plugin-transform-arrow-functions"
+    // ]
+    "presets": [
+        //    "@babel/preset-env"
+        "@vue/babel-preset-app"
+    ]
+}
